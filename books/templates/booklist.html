@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% include "header.html" %}
+
+{% block head %}
+    <title> Book List </title>
+{% endblock head %}
+
+{% block content %}
+<div>
+    <h1>Rongai Bookstore Book List</h1>
+   
+    {% for book in book_list %} 
+    <h2> Book {{ forloop.counter }}: </h2>
+    <ul>
+        <li><strong>Title</strong>: {{ book.title }}</li>
+        <li><strong>Description</strong>: {{ book.description }}</li>
+        <li><strong>Author</strong>: {{ book.author }}</li>
+        <li><strong>Published</strong>: {{ book.publish_date }}</li>
+    </ul>
+    {% empty %}
+        </p> No books added yet </p>
+    {% endfor %}
+</div>
+{% endblock content %}

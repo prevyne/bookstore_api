@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block head %}
+
+<title>
+    Login Page
+</title>
+
+{% endblock head %}
+
+{% block content %}
+
+{% include "header.html" %}
+
+<div>
+    <form action= {% url "login" %} method= 'post' > {% csrf_token %}
+        {{ form.as_p }}
+        <input type='submit' value= 'login' />
+    </form>
+</div>
+
+{% endblock content %}

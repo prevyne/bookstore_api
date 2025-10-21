@@ -15,9 +15,30 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path, include, re_path
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
+from drf_yasg.views import get_schema_view
+from drf_yasg import openapi
+
+schemaView = get_schema_view(
+    openapi.Info(
+        title= 'Bookstore API Documentation',
+        description= 'This is a Swagger documentation for a Bookstore API',
+        default_version= 'v1',
+        contact = openapi.Contact(email = 'prevyneoketch6@gmail.com')
+        ),
+    public = True,
+    permission_classes= ( IsAuthenticatedOrReadOnly, )
+)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', include('books.urls'))
+    path('', include('books.urls')),
+    path('', include('accounts.urls')),
+
+    #Swagger API routes
+    re_path(r'^swagger(?P<format>\.json|\.yaml)$', schemaView.without_ui(cache_timeout=0),
+            name = 'schema-json'),
+    path('swagger/', schemaView.with_ui(cache_timeout= 0), name= 'swagger-doc'),
+    path('redoc/', schemaView.with_ui(cache_timeout= 0), name= 'redoc'),
 ]

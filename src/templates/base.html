@@ -1,0 +1,23 @@
+<html>
+
+    {% block head %}
+    <head>
+        <title>Bookstore</title>
+    </head>
+    {% endblock head %}
+    
+    {% block content %}
+
+    {% include "header.html" %}
+
+    <div>
+        <p>Welcome to Rongai Bookstore</p>
+    </div>
+    <div>
+        <form action= {% url "logout" %} method= 'post'> {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="logout" />
+        </form>
+    </div>
+    {% endblock content %}
+</html>

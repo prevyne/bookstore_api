@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block head %}
+<title>
+    Registration Page
+</title>
+
+{% endblock head %}
+
+{% block content %}
+
+{% include "header.html" %}
+
+<div>
+    <form action= '' method= 'post'> {% csrf_token %}
+        {{ form.as_p }}
+        <input type= 'submit' value= 'register' />
+    </form>
+</div>
+{% endblock content %}
